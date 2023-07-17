@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer {
+  .flex-center {
+    @apply flex justify-center items-center;
+  }
+  .flex-column {
+    @apply flex flex-col;
+  }
+  .nav-mobile-item {
+    @apply px-2 py-4 my-8 rounded-[20px] bg-black;
+  }
+  .flex-between {
+    @apply flex justify-between;
+  }
+}
+
+.gradient_slider {
+  background: rgb(20,20,20);
+  background: linear-gradient(90deg, rgba(20,20,20,0.3337710084033614) 35%, rgba(0,0,0,1) 81%, rgba(0,0,0,1) 88%, rgba(0,0,0,1) 100%);}
+.gradient_bottom{
+  background: rgb(20,20,20);
+background: linear-gradient(0deg, rgba(0,0,0,1) 12%, rgba(143,143,143,0) 71%);
+}
+.reflect{
+  -webkit-box-reflect: below 1px linear-gradient(transparent,transparent,#000);
+
+}
