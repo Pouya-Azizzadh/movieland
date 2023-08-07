@@ -3,7 +3,7 @@ import React, {
   FC,
   useState,
   ReactNode,
-  useEffect,
+  useEffect,useLayoutEffect
 } from "react"
 
 // icons
@@ -25,16 +25,15 @@ const Navbar: FC = () => {
   const [openSearch, setOpenSearch] = useState<boolean>(false)
   const [search, setSearch] = useState<string>("")
   const [user, setUser] = useState<any>()
-
-
+  const [token,setToken]=useState(JSON.parse(localStorage.getItem("token")))
 
 
   useEffect(() => {
-    Service.getUser().then((res) => {
+    Service.getUser(token).then((res) => {
       setUser(res?.data)
     })
-  },[localStorage.getItem('token')])
-
+  },[token])
+console.log("name;",token)
   const handleOpen = () => {
     setOpen(true)
   }
@@ -48,7 +47,7 @@ const Navbar: FC = () => {
     setSearch(e.target.value)
   }
   return (
-    <div className="w-full flex justify-between items-center absolute top-0 z-100 p-4 md:px-10 md:py-8 ">
+    <div className="w-full flex justify-between items-center mb-10 absolute top-0 z-100 p-4 md:px-10 md:py-8 ">
       <ul
         className="max:hidden list-none flex-center"
         style={{ zIndex: 100000000000000000 }}
@@ -58,17 +57,7 @@ const Navbar: FC = () => {
             <img src={Logo} alt="zarfilm" />
           </ButtonLink>
         </li>
-        <li>
-          <ButtonLink to="/cast/" className="text-white">
-            هنرمندان
-          </ButtonLink>
-        </li>
-
-        <li>
-          <ButtonLink to="/pricing/" className="text-white">
-            خرید اشتراک
-          </ButtonLink>
-        </li>
+       
       </ul>
       <div
         onClick={handleOpen}
@@ -96,16 +85,9 @@ const Navbar: FC = () => {
             <AiOutlineClose className="border rounded-[20px] text-2xl" />
           </div>
         </li>
-        <li className="nav-mobile-item flex-between">
-          <div className="flex-center text-3xl text-white">
-            <BsPersonCircle />
-          </div>
-          <ButtonLink to="/cast/" className="text-white">
-            هنرمندان
-          </ButtonLink>
-        </li>
+     
         <li>
-          <div className="flex-center text-3xl text-white">
+          <div className="flex-center my-8 text-3xl text-white">
             <ButtonLink to="login/" className="bg-yellow w-full rounded-[20px]">
               ورود/ثبت نام
             </ButtonLink>
@@ -132,14 +114,14 @@ const Navbar: FC = () => {
           </ButtonLink>
         )}
         <div
-          className="rounded-[20px] p-2 text-bold flex   items-center cursor-pointer bg-black text-white z-50"
+          className="rounded-[20px] p-2 text-bold flex   items-center cursor-pointer  bg-blue-navy text-white z-50"
           onMouseEnter={handleOpenSearch}
         >
           <input
             type="text"
             onChange={handleSearch}
-            className={` bg-black border-none outline-none ml-2 w-[0px] duration-700 ${
-              openSearch ? "w-[160px]" : "w-[0px]"
+            className={` bg-blue-navy border-none outline-none ml-2 w-[0px] duration-700 ${
+              openSearch ? "md:w-[160px] w-[80px]" : "w-[0px]"
             }`}
           />
           <ButtonLink to={`search/${search}`}>

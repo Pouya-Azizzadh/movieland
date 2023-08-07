@@ -4,7 +4,9 @@ import React,{useState} from "react"
 // components
 
 import InputForm from "../components/tags/InputForm"
+import { ToastContainer, toast } from "react-toastify"
 
+import "react-toastify/dist/ReactToastify.css"
 // react router dom 
 import { Link, useNavigate } from "react-router-dom";
 
@@ -26,6 +28,7 @@ const LogIn = () => {
 
     const [data, setData] = useState({});
     const navigate = useNavigate();
+    const notify = (title) => toast(title)
 
     const handleChange = (e:any) => {
       setData((prev) => {
@@ -41,17 +44,34 @@ const LogIn = () => {
         Service.LoginService(data)
           .then(() => {
             //  window.location.reload()
-           // navigate("/webapp/home");
-           console.log(localStorage.getItem("token"))
+            navigate("/webapp/home");
           }).then(() => {
             //  window.location.reload()
            navigate("/");
+          }).catch(er=>{
+            notify("نام کاربری یا رمز عبور اشتباه است")
+
           })
           
       };
 
   return (
     <div className="w-full h-screen  flex-center">
+
+<ToastContainer
+       position="top-right"
+       autoClose={5000}
+       hideProgressBar={false}
+       newestOnTop={false}
+       closeOnClick
+       rtl={false}
+       pauseOnFocusLoss
+       draggable
+       pauseOnHover
+       theme="dark"
+      />
+
+
         <div className="flex flex-col items-center bg-blue-navy bg-slate-200 dark:bg-[#0f0f0f] p-4	rounded-lg md:w-2/6 h-auto border shadow-lg">
           <form className="flex flex-col w-full " onSubmit={handleSignIn}>
             <h1 className="text-3xl text-center text-blue-500 mb-[20px]">

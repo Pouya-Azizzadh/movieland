@@ -44,6 +44,7 @@ function MovieAndSerice() {
     })
   }
   const sendComment = (e: any) => {
+    //e.preventDefault()
     Service.postData("post-comment/", newComment)
   }
   console.log("MOVIE", movie)
@@ -54,7 +55,7 @@ function MovieAndSerice() {
         <div className="w-full flex-center   reflect">
           <img
             className="rounded-[10px] bg-contain h-[400px] mr-[400px] hidden md:block"
-            src={`https://movieland.iran.liara.run${movie?.disk_image}`}
+            src={`https://moviesite.iran.liara.run${movie?.disk_image}`}
             alt={movie.title}
             style={{ zIndex: 1000 }}
           />
@@ -62,7 +63,7 @@ function MovieAndSerice() {
           <div
             className="bg-cover	 text-white  min-w-full md:w-4/5 md:h-[700px]  "
             style={{
-              backgroundImage: `url('https://movieland.iran.liara.run${movie.poster}')`,
+              backgroundImage: `url('https://moviesite.iran.liara.run${movie.poster}')`,
               backgroundSize: "cover",
 
             }}
@@ -90,7 +91,7 @@ function MovieAndSerice() {
               </div>
             </div>
             <div className="gradient_bottom md:hidden block  flex-column text-center justify-center p-20 items-end top-0 w-full h-full">
-              <h2 className="text-3xl font-bold">دانلود سریال{movie.title}</h2>
+              <h2 className="text-3xl font-bold">دانلود فیلم{movie.title}</h2>
 
               <p className="text-gray my-8">{movie.story}</p>
               <div className="flex items-center">

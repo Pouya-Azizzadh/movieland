@@ -24,8 +24,10 @@ const CustomSlider = () => {
 
   useEffect(() => {
     async function fetchData() {
-      const Response = await Service.getData("list/5")
-      setNewMovie(Response.data.list)
+      const Response = await Service.getData("new-movie/")
+      setNewMovie(Response.data.results)
+      console.log('val',Response.data.results)
+
     }
     fetchData()
   }, [])
@@ -36,19 +38,19 @@ const CustomSlider = () => {
     console.log(val)
   }
 
-  console.log("d", currentMovie)
+  console.log("d", newMonvie)
   const swiperChilderen = newMonvie?.map((item: any) => {
     return (
-      <SwiperSlide key={item.id} >
-        <Link to={`${item.title}`}>
+      <SwiperSlide key={item.movie.id} >
+        <Link to={`${item.movie.title}`}>
           <div
             className={`w-[200px] h-[300px] max:w-[150px] max:h-[220px] hover:scale-110	z-40 flex justify-end items-end	duration-700	 p-4 text-white bg-cover	rounded-[10px]`}
             style={{
-              backgroundImage: `url('https://movieland.iran.liara.run${item.disk_image}')`,
+              backgroundImage: `url('${item.movie.disk_image}')`,
             }}
           >
             <span>10</span>
-            <span className=" text-2xl  font-semibold ">/{item.imdb}</span>
+            <span className=" text-2xl  font-semibold ">/{item.movie.imdb}</span>
           </div>
         </Link>
       </SwiperSlide>
@@ -69,18 +71,18 @@ const CustomSlider = () => {
       </div>
       {newMonvie && (
         <div
-          className="gradient_slider hidden md:block text-white absolute top-0 w-4/5 h-[700px] left-0 rounded-b-[60px]"
+          className="gradient_slider hidden md:block text-white absolute top-0 w-[95%] h-[700px] left-0 rounded-b-[60px]"
           style={{
-            backgroundImage: `url('https://movieland.iran.liara.run${newMonvie[currentMovie].poster}')`,
+            backgroundImage: `url('${newMonvie[currentMovie].movie.poster}')`,
           }}
         >
           <div className="gradient_slider absolute flex-column justify-center p-20 items-end top-0 w-full h-full">
             <h1 className="text-3xl font-bold">
-              {newMonvie[currentMovie].title}
+              {newMonvie[currentMovie].movie.title}
             </h1>
             <img src={Imdb} className="w-[80px] mt-10" alt="imdb"/>
             <div>
-            <span className=" text-4xl  font-semibold ">{newMonvie[currentMovie].imdb}/</span>
+            <span className=" text-4xl  font-semibold ">{newMonvie[currentMovie].movie.imdb}/</span>
             <span>10</span>
 
             </div>

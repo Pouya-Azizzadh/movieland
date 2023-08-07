@@ -23,15 +23,12 @@ import CustomSlider from "../../components/CustomSlider"
 
 function Home() {
   const width = window.innerWidth
-  const [newMonvie, setNewMovie] = useState<AxiosResponse | null | void | any>()
   const [movie, setMovie] = useState<AxiosResponse | null | void | any>()
 
   useEffect(() => {
     async function fetchData() {
-      const Response = await Service.getData("list/5")
       const Movies = await Service.getData("movies/")
 
-      setNewMovie(Response.data.list)
       setMovie(Movies.data.results)
 
     }

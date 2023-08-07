@@ -23,7 +23,6 @@ function App() {
   return (
     <div style={{ minHeight: "100vh" }} className="text-white w-full bg-black ">
       <div className="bg-black">
-        <Navbar />
         <div>
           <Routes>
             {routes.map((route) => {
@@ -34,6 +33,24 @@ function App() {
                     path={route.path}
                     element={route.component}
                   />
+                )
+              } else if (route.type === "multiple") {
+                return (
+                  <Route
+                    key={route.path}
+                    path={route.path}
+                    element={route.component}
+                  >
+                    {route.list?.map((listroute) => {
+                      return (
+                        <Route
+                          key={listroute.path}
+                          path={listroute.path}
+                          element={listroute.component}
+                        />
+                      )
+                    })}
+                  </Route>
                 )
               }
             })}
