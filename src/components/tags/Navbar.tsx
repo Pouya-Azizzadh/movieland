@@ -25,7 +25,7 @@ const Navbar: FC = () => {
   const [openSearch, setOpenSearch] = useState<boolean>(false)
   const [search, setSearch] = useState<string>("")
   const [user, setUser] = useState<any>()
-  const [token,setToken]=useState(JSON.parse(localStorage.getItem("token")))
+  const [token,setToken]=useState(JSON.parse(localStorage.getItem("token")|| '{}'))
 
 
   useEffect(() => {
